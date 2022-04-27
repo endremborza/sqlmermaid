@@ -9,7 +9,10 @@ dependencies = ["sqlalchemy"]
 
 [project.optional-dependencies]
 test = ["branthebuilder"]
-doc = ["branthebuilder[doc]"]
+doc = [
+    "branthebuilder[doc]",
+    "sphinxcontrib-mermaid"
+]
 
 [project.urls]
 Homepage = "https://github.com/endremborza/sqlmermaid"

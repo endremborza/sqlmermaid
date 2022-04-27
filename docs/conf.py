@@ -43,6 +43,7 @@ extensions = [
     "sphinx_automodapi.smart_resolver",
     "sphinx.ext.graphviz",
     "sphinx.ext.intersphinx",
+    "sphinxcontrib.mermaid",
     "myst_parser",
 ]
 
