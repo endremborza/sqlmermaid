@@ -8,7 +8,7 @@ from pathlib import Path
 
 import sqlalchemy as sa
 
-__version__ = "0.0.0"
+__version__ = "0.1.0"
 
 
 def get_mermaid(constr):
