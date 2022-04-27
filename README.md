@@ -5,3 +5,4 @@
 [![codecov](https://img.shields.io/codecov/c/github/endremborza/sqlmermaid)](https://codecov.io/gh/endremborza/sqlmermaid)
 [![pypi](https://img.shields.io/pypi/v/sqlmermaid.svg)](https://pypi.org/project/sqlmermaid/)
 
+Planning to do better notebook for docs.
