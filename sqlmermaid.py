@@ -67,8 +67,12 @@ def to_file(constr: str, output_fp: str):
 
 
 def open_in_browser(constr):
+    """opens schema diagram in the browser
+
+    >>> open_in_browser("sqlite:///:memory:")
+    """
     output_file = tempfile.NamedTemporaryFile(suffix=".html", delete=False)
-    to_file(output_file)
+    to_file(constr, output_file.name)
     url = urllib.parse.urlunparse(("file", "", output_file.name, "", "", ""))
     webbrowser.open(url)
 
