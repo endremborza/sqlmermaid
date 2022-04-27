@@ -1,8 +1,13 @@
+Quickstart
+==========
+
 .. code:: ipython3
 
+    from pathlib import Path
+    
     import sqlalchemy as sa
     
-    from sqlmermaid import get_mermaid
+    from sqlmermaid import get_mermaid, to_file
     
     
     metadata_obj = sa.MetaData()
@@ -51,8 +56,19 @@
 
 .. code:: ipython3
 
-    constr = "sqlite:///db3.sqlite"  # "sqlite:///:memory:"
+    db_file = Path("db.sqlite")
+    constr = f"sqlite:///{db_file}"
     engine = sa.create_engine(constr)
     metadata_obj.create_all(engine)
     
-    print(get_mermaid(constr))
+    # generates the raw mermaid string
+    mermaid_str = get_mermaid(constr)
+
+.. code:: ipython3
+
+    to_file(constr, "erd.md")
+
+.. code:: ipython3
+
+    db_file.unlink()
+    Path("erd.md").unlink()
