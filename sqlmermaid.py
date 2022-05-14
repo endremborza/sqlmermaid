@@ -4,11 +4,12 @@ import re
 import tempfile
 import urllib
 import webbrowser
+from collections import defaultdict
 from pathlib import Path
 
 import sqlalchemy as sa
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 def get_mermaid(constr):
@@ -20,9 +21,14 @@ def get_mermaid(constr):
     edge_fstr = '%s ||--|{ %s : "%s"'
     edges = []
     for table_id, table in meta.tables.items():
+        edge_dic = defaultdict(list)
         for fk in table.foreign_keys:
             col = fk.column
-            edges.append(edge_fstr % (table_id, col.table.fullname, fk.parent.name))
+            target_col = fk.target_fullname.split(".")[-1]
+            edge_dic[col.table.fullname].append((fk.parent.name, target_col))
+        for target_table, colpairs in edge_dic.items():
+            edge_label = "; ".join(f"{c1} -> {c2}" for c1, c2 in colpairs)
+            edges.append(edge_fstr % (table_id, target_table, edge_label))
     return "\n  ".join(["erDiagram", *nodes, *edges])
 
 
