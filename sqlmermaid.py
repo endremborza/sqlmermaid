@@ -9,13 +9,13 @@ from pathlib import Path
 
 import sqlalchemy as sa
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 
 def get_mermaid(constr):
     engine = sa.create_engine(constr)
-    meta = sa.MetaData(bind=engine)
-    sa.MetaData.reflect(meta)
+    meta = sa.MetaData()
+    meta.reflect(bind=engine)
     nodes = [to_mermaid_node(table) for table in meta.tables.values()]
 
     edge_fstr = '%s ||--|{ %s : "%s"'
