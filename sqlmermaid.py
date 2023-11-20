@@ -6,16 +6,28 @@ import urllib
 import webbrowser
 from collections import defaultdict
 from pathlib import Path
+from typing import Union
 
 import sqlalchemy as sa
 
 __version__ = "0.1.2"
 
 
-def get_mermaid(constr):
-    engine = sa.create_engine(constr)
-    meta = sa.MetaData()
-    meta.reflect(bind=engine)
+def get_mermaid(constr_or_meta: Union[str, sa.MetaData]) -> str:
+    if isinstance(constr_or_meta, str):
+        engine = sa.create_engine(constr_or_meta)
+        meta = sa.MetaData()
+        meta.reflect(bind=engine)
+    else:
+        if not isinstance(constr_or_meta, sa.MetaData):
+            msg = (
+                "Expected `constr_or_meta` to be a `str` or `sa.MetaData` instance!\n"
+                f"type(constr_or_meta) = {type(constr_or_meta)}"
+            )
+            raise TypeError(msg)
+        else:
+            meta = constr_or_meta
+
     nodes = [to_mermaid_node(table) for table in meta.tables.values()]
 
     edge_fstr = '%s ||--|{ %s : "%s"'
