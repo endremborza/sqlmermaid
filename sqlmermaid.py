@@ -30,7 +30,7 @@ def get_mermaid(constr_or_meta: Union[str, sa.MetaData]) -> str:
 
     nodes = [to_mermaid_node(table) for table in meta.tables.values()]
 
-    edge_fstr = '%s ||--|{ %s : "%s"'
+    edge_fstr = '"%s" ||--|{ "%s" : "%s"'
     edges = []
     for table_id, table in meta.tables.items():
         edge_dic = defaultdict(list)
@@ -58,7 +58,7 @@ def to_mermaid_node(table: sa.Table):
         else:
             comm = ""
         cols.append(" ".join(["   ", format_col_type(col), cn, extra, comm]))
-    head = table.fullname + " {"
+    head = '"%s" {' % table.fullname
     return "    \n".join([head, *cols]) + "\n  }"
 
 
