@@ -17,7 +17,7 @@ def get_mermaid(constr_or_meta: Union[str, sa.MetaData]) -> str:
     if isinstance(constr_or_meta, str):
         engine = sa.create_engine(constr_or_meta)
         meta = sa.MetaData()
-        meta.reflect(bind=engine)
+        meta.reflect(bind=engine, views=True)
     else:
         if not isinstance(constr_or_meta, sa.MetaData):
             msg = (
