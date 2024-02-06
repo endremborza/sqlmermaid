@@ -10,7 +10,7 @@ from typing import Union
 
 import sqlalchemy as sa
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 def get_mermaid(constr_or_meta: Union[str, sa.MetaData]) -> str:
