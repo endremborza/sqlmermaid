@@ -5,7 +5,7 @@ dynamic = ["version"]
 authors = [{name = "Endre Márk Borza", email = "endremborza@gmail.com"}]
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 dependencies = ["sqlalchemy>=2.0.0"]
 
 [project.urls]
