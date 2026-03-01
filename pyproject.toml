@@ -1,25 +1,29 @@
 [project]
 name = "sqlmermaid"
-dynamic = ["version", "description"]
+description = "Visualizing SQL databases"
+dynamic = ["version"]
 authors = [{name = "Endre Márk Borza", email = "endremborza@gmail.com"}]
 license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = ["sqlalchemy>=2.0.0"]
 
-[project.optional-dependencies]
-test = ["branthebuilder"]
+[project.urls]
+Homepage = "https://github.com/endremborza/sqlmermaid"
+
+[dependency-groups]
+test = ["branthebuilder[test]"]
 doc = [
     "branthebuilder[doc]",
     "sphinxcontrib-mermaid"
 ]
 
-[project.urls]
-Homepage = "https://github.com/endremborza/sqlmermaid"
-
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.branb]
-line-length = 88
+[tool.hatch.version]
+path = "sqlmermaid.py"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

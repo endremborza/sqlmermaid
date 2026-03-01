@@ -2,7 +2,7 @@ name: Python Test
 
 on:
   pull_request:
-    branches: 
+    branches:
       - main
   push:
     branches:
@@ -12,19 +12,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python
-      uses: actions/setup-python@v1
+    - uses: actions/checkout@v4
+    - uses: astral-sh/setup-uv@v5
       with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e .[test]
-    - name: Test
-      run: |
-        branb test
-    - name: "Upload coverage to Codecov"
-      uses: codecov/codecov-action@v2
+        python-version: '3.8'
+        enable-cache: true
+    - run: uv pip install -e .[test]
+    - run: branb test
+    - uses: codecov/codecov-action@v4
       with:
         fail_ci_if_error: true

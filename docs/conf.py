@@ -1,30 +1,12 @@
-import toml
 import datetime
 import os
 import sys
+import tomllib
 
 sys.path.insert(0, os.path.abspath(".."))
 
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
-# -- Path setup --------------------------------------------------------------
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
-
-
-# -- Project information -----------------------------------------------------
-
-pytom = toml.load("../pyproject.toml")
+with open("../pyproject.toml", "rb") as _f:
+    pytom = tomllib.load(_f)
 
 project = pytom["project"]["name"]
 author = " - ".join([a["name"] for a in pytom["project"]["authors"]])
@@ -43,7 +25,6 @@ extensions = [
     "sphinx_automodapi.smart_resolver",
     "sphinx.ext.graphviz",
     "sphinx.ext.intersphinx",
-    "sphinxcontrib.mermaid",
     "myst_parser",
 ]
 
