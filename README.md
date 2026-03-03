@@ -37,8 +37,35 @@ erDiagram
 ```
 pip install sqlmermaid
 ```
+or
+`uv tool install sqlmermaid`
+
 
 ## Usage
+
+### Command line
+
+```
+sqlmermaid <connection_string> [options]
+```
+
+| Option | Description |
+|--------|-------------|
+| _(none)_ | Print Mermaid diagram to stdout |
+| `-o FILE` / `--output FILE` | Write diagram to `.md` or `.html` |
+| `--browser` | Open diagram in the default browser |
+
+```bash
+# Print to stdout
+sqlmermaid sqlite:///mydb.db
+
+# Write Markdown
+sqlmermaid sqlite:///mydb.db -o schema.md
+
+# Open in browser
+sqlmermaid postgresql://user:pass@localhost/mydb --browser
+```
+
 
 ### Python API
 
@@ -65,29 +92,6 @@ from sqlmermaid import get_mermaid
 meta = sa.MetaData()
 meta.reflect(bind=engine)
 print(get_mermaid(meta))
-```
-
-### Command line
-
-```
-python -m sqlmermaid <connection_string> [options]
-```
-
-| Option | Description |
-|--------|-------------|
-| _(none)_ | Print Mermaid diagram to stdout |
-| `-o FILE` / `--output FILE` | Write diagram to `.md` or `.html` |
-| `--browser` | Open diagram in the default browser |
-
-```bash
-# Print to stdout
-python -m sqlmermaid sqlite:///mydb.db
-
-# Write Markdown
-python -m sqlmermaid sqlite:///mydb.db -o schema.md
-
-# Open in browser
-python -m sqlmermaid postgresql://user:pass@localhost/mydb --browser
 ```
 
 ## Diagram features
