@@ -4,7 +4,13 @@ import sys
 import pytest
 import sqlalchemy as sa
 
-from sqlmermaid import format_col_type, get_mermaid, open_in_browser, to_file, to_mermaid_node
+from sqlmermaid import (
+    format_col_type,
+    get_mermaid,
+    open_in_browser,
+    to_file,
+    to_mermaid_node,
+)
 
 
 @pytest.fixture
@@ -136,13 +142,13 @@ class TestOpenInBrowser:
         monkeypatch.setattr("webbrowser.open", lambda url: opened.append(url))
         open_in_browser("sqlite:///:memory:")
         assert len(opened) == 1
-        assert opened[0].startswith("file://")
+        assert opened[0].startswith("file:")
 
     def test_temp_file_is_html(self, monkeypatch, tmp_path):
         captured = []
         monkeypatch.setattr("webbrowser.open", lambda url: captured.append(url))
         open_in_browser("sqlite:///:memory:")
-        path = captured[0].replace("file://", "")
+        path = captured[0].replace("file:", "")
         assert path.endswith(".html")
 
 
