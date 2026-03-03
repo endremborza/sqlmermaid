@@ -29,7 +29,7 @@ from pathlib import Path
 
 import sqlalchemy as sa
 
-__version__ = "0.1.4"
+__version__ = "1.0.0"
 
 
 def get_mermaid(constr_or_meta: str | sa.MetaData) -> str:
