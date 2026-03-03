@@ -11,13 +11,6 @@ dependencies = ["sqlalchemy>=2.0.0"]
 [project.urls]
 Homepage = "https://github.com/endremborza/sqlmermaid"
 
-[dependency-groups]
-test = ["branthebuilder[test]"]
-doc = [
-    "branthebuilder[doc]",
-    "sphinxcontrib-mermaid"
-]
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
