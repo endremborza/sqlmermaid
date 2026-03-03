@@ -12,7 +12,7 @@ jobs:
   comp_test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-2022, macos-13, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -20,5 +20,5 @@ jobs:
         with:
           python-version: '3.12'
           enable-cache: true
-      - run: uv sync --group test
+      - run: uv tool install branthebuilder
       - run: branb test

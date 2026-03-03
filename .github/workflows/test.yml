@@ -17,8 +17,5 @@ jobs:
       with:
         python-version: '3.12'
         enable-cache: true
-    - run: uv sync --group test
+    - run: uv tool install branthebuilder
     - run: branb test
-    - uses: codecov/codecov-action@v5
-      with:
-        fail_ci_if_error: true
