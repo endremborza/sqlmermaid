@@ -61,10 +61,14 @@ def get_mermaid(constr_or_meta: str | sa.MetaData) -> str:
     edges = []
     for table_id, table in meta.tables.items():
         edge_dic = defaultdict(list)
-        for fk in table.foreign_keys:
+        # table.foreign_keys is a set; sort so the diagram is deterministic
+        # (stable across processes regardless of hash seed).
+        sorted_fks = sorted(
+            table.foreign_keys, key=lambda fk: (fk.parent.name, fk.target_fullname)
+        )
+        for fk in sorted_fks:
             col = fk.column
-            target_col = fk.target_fullname.split(".")[-1]
-            edge_dic[col.table.fullname].append((fk.parent.name, target_col))
+            edge_dic[col.table.fullname].append((fk.parent.name, col.name))
         for target_table, colpairs in edge_dic.items():
             edge_label = "; ".join(f"{c1} -> {c2}" for c1, c2 in colpairs)
             edges.append(edge_fstr % (table_id, target_table, edge_label))
@@ -85,7 +89,7 @@ def to_mermaid_node(table: sa.Table) -> str:
     for col in table.columns:
         cn = col.name
         extra = "PK" if cn in pks else ("FK" if cn in fks else "")
-        in_inds = [k for k, v in ind_dic.items() if cn in v]
+        in_inds = sorted(k for k, v in ind_dic.items() if cn in v)
         if in_inds:
             comm = f'"in index: {", ".join(in_inds)}"'
         else:

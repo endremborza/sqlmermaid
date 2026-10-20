@@ -27,8 +27,8 @@ erDiagram
      VARCHAR-60 employee_name
      INTEGER employee_dept FK
   }
-  "complaints" ||--|{ "user" : "by_user -> user_id"
   "complaints" ||--|{ "departments" : "about_dept -> department_id"
+  "complaints" ||--|{ "user" : "by_user -> user_id"
   "employees" ||--|{ "departments" : "employee_dept -> department_id"
 ```
 
