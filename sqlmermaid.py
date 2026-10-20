@@ -22,7 +22,7 @@ Command-line usage::
 import argparse
 import re
 import tempfile
-import urllib
+import urllib.parse
 import webbrowser
 from collections import defaultdict
 from pathlib import Path
