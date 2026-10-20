@@ -1,6 +1,6 @@
 [project]
 name = "sqlmermaid"
-description = "Visualizing SQL databases"
+description = "Generate Mermaid ER diagrams from SQL database schemas"
 dynamic = ["version"]
 authors = [{name = "Endre Márk Borza", email = "endremborza@gmail.com"}]
 license = {file = "LICENSE"}
